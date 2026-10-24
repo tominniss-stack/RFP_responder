@@ -982,6 +982,8 @@ class TestHarnessClient:
     Automatically connects to live server if reachable; otherwise uses ContractReferenceEngine.
     """
 
+    __test__ = False  # helper, not a test case — stops pytest trying to collect it
+
     def __init__(self, base_url: str = "http://localhost:8000/api", force_contract_engine: bool = False):
         self.base_url = base_url.rstrip("/")
         self.is_live = False

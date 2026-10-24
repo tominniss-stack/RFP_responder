@@ -116,7 +116,24 @@ def extract_from_docx(file_input: Union[bytes, io.BytesIO, str, Path]) -> str:
         for p in doc.paragraphs:
             t = p.text.strip()
             if t:
-                if p.style and "heading" in p.style.name.lower():
+                # Resolved style name (python-docx falls back to "Normal" when the
+                # referenced style ID is not defined in styles.xml) plus the raw
+                # w:pStyle ID from the XML, so documents with missing/partial style
+                # parts still have their headings recognised.
+                style_name = ""
+                try:
+                    if p.style is not None and p.style.name:
+                        style_name = p.style.name.lower()
+                except Exception:
+                    style_name = ""
+                raw_style = ""
+                try:
+                    p_pr = p._p.pPr
+                    if p_pr is not None and p_pr.pStyle is not None and p_pr.pStyle.val:
+                        raw_style = str(p_pr.pStyle.val).lower()
+                except Exception:
+                    raw_style = ""
+                if "heading" in style_name or "heading" in raw_style or "title" in raw_style:
                     paragraphs.append(f"## {t}")
                 else:
                     paragraphs.append(t)
