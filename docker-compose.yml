@@ -1,0 +1,31 @@
+# Mock-mode demo: no API keys or Google credentials required.
+#   docker compose up --build
+#   open http://localhost:3010
+services:
+  backend:
+    build: ./backend
+    environment:
+      MOCK_LLM: "1"
+      PORT: "4010"
+      HOST: "0.0.0.0"
+      DATABASE_PATH: /data/rfp_assistant.db
+    volumes:
+      - rfp-data:/data
+    ports:
+      - "4010:4010"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:4010/api/health').status==200 else 1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3010:80"
+
+volumes:
+  rfp-data:

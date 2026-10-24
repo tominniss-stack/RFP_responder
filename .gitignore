@@ -1,0 +1,145 @@
+# =============================================================================
+# Python
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+backend/.venv/
+
+# Test / coverage / tooling caches
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# =============================================================================
+# Node / Frontend
+# =============================================================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+.vite/
+.eslintcache
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Playwright / audit artefacts
+test-results/
+playwright-report/
+# Working/planning documents and audit artefacts — never published
+plans/
+
+# =============================================================================
+# Databases — never commit any SQLite file anywhere in the tree
+# =============================================================================
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# =============================================================================
+# Runtime data & generated artefacts
+# =============================================================================
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+backend/data/exports/
+backend/data/chromadb/
+backend/data/sample_rfp.*
+frontend/public/sample_rfp.*
+backend/logs/
+logs/
+*.log
+
+# =============================================================================
+# Secrets — Google OAuth, env files, tokens
+# =============================================================================
+credentials.json
+token.json
+token.pickle
+client_secret*.json
+service-account*.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# =============================================================================
+# AI assistant / agent tooling artefacts
+# =============================================================================
+.agents/
+.roo/
+.roomodes
+.cursor/
+.cursorrules
+.claude/
+.aider*
+.continue/
+.windsurf/
+*.patch
+*.orig
+*.rej
+
+# =============================================================================
+# OS / editor
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.history/
+
+# =============================================================================
+# Scratch
+# =============================================================================
+scratch/
+tmp/
+.wheel_cache/

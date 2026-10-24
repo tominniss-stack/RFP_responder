@@ -1,0 +1,25 @@
+# Core web framework
+fastapi>=0.115.0
+starlette>=0.40.0
+pydantic>=2.10.0
+uvicorn[standard]>=0.20.0
+
+# HTTP & async
+httpx>=0.28.0
+python-dotenv>=1.0.0
+anyio>=4.0.0
+
+# Document ingestion
+pdfplumber>=0.11.0
+python-docx>=1.0.0
+
+# Testing
+pytest>=7.0.0
+
+# ---------------------------------------------------------------------------
+# Optional extras — install only if you enable the corresponding feature.
+# ---------------------------------------------------------------------------
+# Live Google Docs export (Settings → Mock export OFF):
+#   pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
+# ChromaDB vector store (otherwise a pure-Python TF-IDF store is used):
+#   pip install chromadb

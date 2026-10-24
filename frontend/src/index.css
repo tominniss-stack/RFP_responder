@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   Design tokens — Another Marketing Agency
+   ----------------------------------------------------------------------------
+   Every colour is an RGB channel triplet so Tailwind opacity modifiers work
+   (e.g. `bg-accent/20`). Light values live on :root, dark values on `.dark`.
+   The theme toggle only ever adds/removes the `dark` class on <html>; nothing
+   else in the app needs to know which theme is active.
+
+   Contrast (WCAG 2.2):
+     ink        on canvas/surface  ≥ 15:1 both themes
+     ink-muted  on canvas          6.1:1 light · 7.4:1 dark
+     ink-muted  on surface         6.6:1 light · 6.5:1 dark
+     accent-ink on accent          5.3:1 light · 10.2:1 dark
+     border-strong vs surface      3.2:1 light · 3.1:1 dark  (1.4.11 non-text)
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --color-canvas: 246 245 242;        /* #F6F5F2 warm off-white */
+    --color-surface: 255 255 255;       /* #FFFFFF */
+    --color-surface-raised: 238 237 232;/* #EEEDE8 */
+    --color-overlay: 21 23 28;          /* #15171C used at /60 for modal scrim */
+
+    --color-ink: 21 23 28;              /* #15171C */
+    --color-ink-muted: 85 91 105;       /* #555B69 */
+    --color-ink-inverse: 255 255 255;
+
+    --color-border: 221 219 212;        /* #DDDBD4 decorative */
+    --color-border-strong: 133 139 152; /* #858B98 interactive ≥3:1 */
+
+    --color-accent: 11 102 112;         /* #0B6670 deep teal — ≥5.6:1 on canvas, surface, surface-raised and accent-soft */
+    --color-accent-hover: 8 79 87;      /* #084F57 */
+    --color-accent-ink: 255 255 255;
+    --color-accent-soft: 215 240 242;   /* #D7F0F2 */
+
+    --color-success: 30 127 79;         /* #1E7F4F */
+    --color-success-soft: 220 243 230;  /* #DCF3E6 */
+    --color-warning: 180 83 9;          /* #B45309 */
+    --color-warning-soft: 253 235 211;  /* #FDEBD3 */
+    --color-danger: 180 35 24;          /* #B42318 */
+    --color-danger-soft: 251 227 224;   /* #FBE3E0 */
+    --color-info: 29 78 216;            /* #1D4ED8 */
+    --color-info-soft: 220 230 251;     /* #DCE6FB */
+
+    --shadow-card: 0 1px 2px rgb(21 23 28 / 0.06), 0 1px 1px rgb(21 23 28 / 0.04);
+    --shadow-raised: 0 8px 24px rgb(21 23 28 / 0.12), 0 2px 6px rgb(21 23 28 / 0.08);
+    --shadow-sharp: 3px 3px 0 0 rgb(var(--color-ink));
+    --shadow-sharp-sm: 1px 1px 0 0 rgb(var(--color-ink));
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --color-canvas: 15 17 20;           /* #0F1114 */
+    --color-surface: 24 27 32;          /* #181B20 */
+    --color-surface-raised: 34 38 45;   /* #22262D */
+    --color-overlay: 0 0 0;
+
+    --color-ink: 236 238 241;           /* #ECEEF1 */
+    --color-ink-muted: 163 169 181;     /* #A3A9B5 */
+    --color-ink-inverse: 15 17 20;
+
+    --color-border: 44 49 58;           /* #2C313A */
+    --color-border-strong: 110 117 132; /* #6E7584 */
+
+    --color-accent: 79 209 219;         /* #4FD1DB bright teal */
+    --color-accent-hover: 127 224 231;  /* #7FE0E7 */
+    --color-accent-ink: 15 17 20;
+    --color-accent-soft: 18 60 65;      /* #123C41 */
+
+    --color-success: 92 203 138;        /* #5CCB8A */
+    --color-success-soft: 18 54 31;     /* #12361F */
+    --color-warning: 245 181 68;        /* #F5B544 */
+    --color-warning-soft: 59 42 10;     /* #3B2A0A */
+    --color-danger: 249 112 102;        /* #F97066 */
+    --color-danger-soft: 62 21 18;      /* #3E1512 */
+    --color-info: 138 180 248;          /* #8AB4F8 */
+    --color-info-soft: 20 38 74;        /* #14264A */
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-raised: 0 8px 24px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.4);
+    --shadow-sharp: 3px 3px 0 0 rgb(0 0 0 / 0.85);
+    --shadow-sharp-sm: 1px 1px 0 0 rgb(0 0 0 / 0.85);
+  }
+
+  html {
+    @apply bg-canvas text-ink antialiased;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans min-h-screen;
+  }
+
+  /* Accessible focus ring: accent ring with an offset in the surface colour so it
+     reads clearly on cards, canvas, and dark backgrounds alike. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-canvas;
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-ink;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- Buttons ----------------------------------------------------------- */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-md px-4 py-2 text-sm
+           transition-colors duration-150 active:translate-y-px
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:active:translate-y-0;
+  }
+
+  .btn-primary {
+    @apply btn-base bg-accent text-accent-ink border border-accent hover:bg-accent-hover hover:border-accent-hover
+           disabled:hover:bg-accent disabled:hover:border-accent;
+  }
+
+  .btn-secondary {
+    @apply btn-base bg-surface text-ink border border-border-strong hover:bg-surface-raised;
+  }
+
+  .btn-dark {
+    @apply btn-base bg-ink text-ink-inverse border border-ink hover:opacity-90;
+  }
+
+  .btn-danger {
+    @apply btn-base bg-surface text-danger border border-danger/40 hover:bg-danger-soft hover:border-danger px-3 py-1.5;
+  }
+
+  .btn-ghost {
+    @apply btn-base bg-transparent text-ink-muted border border-transparent hover:bg-surface-raised hover:text-ink px-2.5 py-1.5;
+  }
+
+  .btn-icon {
+    @apply inline-flex items-center justify-center rounded-md p-2 text-ink-muted
+           hover:bg-surface-raised hover:text-ink transition-colors disabled:opacity-50;
+  }
+
+  /* ---- Surfaces ----------------------------------------------------------- */
+  .card {
+    @apply bg-surface text-ink border border-border rounded-lg p-6 shadow-card;
+  }
+
+  .sub-card {
+    @apply bg-surface-raised text-ink border border-border rounded-md p-3.5 text-sm;
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-ink tracking-tight mb-4;
+  }
+
+  /* ---- Forms -------------------------------------------------------------- */
+  .input-field {
+    @apply w-full bg-surface text-ink border border-border-strong rounded-md px-3 py-2 text-sm
+           placeholder:text-ink-muted/80 transition-colors
+           focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .field-label {
+    @apply block text-xs font-bold uppercase tracking-wider text-ink-muted mb-1;
+  }
+
+  .help-text {
+    @apply text-xs text-ink-muted;
+  }
+
+  /* ---- Tabs --------------------------------------------------------------- */
+  .tab {
+    @apply px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-ink-muted
+           hover:text-ink transition-colors whitespace-nowrap;
+  }
+  .tab-active {
+    @apply border-accent text-ink;
+  }
+
+  /* ---- Pills / chips ------------------------------------------------------ */
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium border;
+  }
+  .chip-neutral { @apply bg-surface-raised text-ink border-border; }
+  .chip-accent  { @apply bg-accent-soft text-ink border-accent/40; }
+  .chip-success { @apply bg-success-soft text-ink border-success/40; }
+  .chip-warning { @apply bg-warning-soft text-ink border-warning/50; }
+  .chip-danger  { @apply bg-danger-soft text-ink border-danger/40; }
+  .chip-info    { @apply bg-info-soft text-ink border-info/40; }
+  .chip-solid   { @apply bg-ink text-ink-inverse border-ink; }
+
+  /* ---- Utility ------------------------------------------------------------ */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply sr-only;
+  }
+}

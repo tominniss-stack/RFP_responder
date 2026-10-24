@@ -1,0 +1,35 @@
+{
+  "name": "rfp-response-assistant",
+  "version": "1.1.0",
+  "private": true,
+  "description": "AI-assisted RFP response drafting: classify sections, retrieve past content with outcome-weighted RAG, inject exact pricing, track gaps, export to Google Docs.",
+  "scripts": {
+    "dev": "bash start.sh",
+    "start": "bash start.sh",
+    "setup": "bash start.sh --setup-only",
+    "verify": "bash start.sh --verify",
+    "dev:backend": "cd backend && (../.venv/bin/python run.py 2>/dev/null || ./.venv/bin/python run.py 2>/dev/null || python3 run.py)",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build:frontend": "npm run build --prefix frontend",
+    "test": "npm run test:backend && npm run test:e2e",
+    "test:backend": "cd backend && (../.venv/bin/python -m pytest tests/ -q 2>/dev/null || ./.venv/bin/python -m pytest tests/ -q 2>/dev/null || python3 -m pytest tests/ -q)",
+    "test:e2e": "(.venv/bin/python -m pytest tests/ -q 2>/dev/null || python3 -m pytest tests/ -q)",
+    "test:tiers": "(.venv/bin/python -m tests.runner 2>/dev/null || python3 -m tests.runner)",
+    "lint:theme": "bash scripts/lint-theme.sh",
+    "audit:a11y": "node frontend/scripts/a11y-audit.mjs",
+    "seed": "cd backend && (../.venv/bin/python -m app.seeds 2>/dev/null || ./.venv/bin/python -m app.seeds 2>/dev/null || python3 -m app.seeds)",
+    "health": "python3 -c \"import urllib.request, json; res = urllib.request.urlopen('http://127.0.0.1:4010/api/health'); print(json.dumps(json.loads(res.read().decode()), indent=2))\""
+  },
+  "keywords": [
+    "rfp",
+    "proposal",
+    "fastapi",
+    "react",
+    "vite",
+    "tailwind",
+    "rag",
+    "llm",
+    "portfolio"
+  ],
+  "license": "MIT"
+}

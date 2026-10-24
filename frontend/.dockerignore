@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vite/
+playwright-report/
+test-results/
+scripts/a11y-audit.mjs
